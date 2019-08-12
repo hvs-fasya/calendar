@@ -1,0 +1,5 @@
+ENVIRONMENT = "dev"
+[DB]
+	DBName = "calendar"
+	DBUser = "calendar_user"
+	DBPass = "calendar_pass"
