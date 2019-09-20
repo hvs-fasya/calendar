@@ -4,18 +4,20 @@ import "time"
 
 //Event event structure
 type Event struct {
-	UUID string
-	EventData
-	User
+	UUID      string `json:"uuid"`
+	EventData `json:"data"`
+	User      `json:"user"`
 }
+
+type Events map[string]Event
 
 //EventData event attributes
 type EventData struct {
-	Title        string
-	TimeStamp    time.Time
-	Duration     time.Duration
-	Description  string
-	NotifyBefore *time.Duration
+	Title        string         `json:"title"`
+	TimeStamp    time.Time      `json:"time_stamp"`
+	Duration     time.Duration  `json:"duration"`
+	Description  string         `json:"description"`
+	NotifyBefore *time.Duration `json:"notify_before"`
 }
 
 //User user structure

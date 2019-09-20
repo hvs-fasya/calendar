@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+import "calendar.proto";
+
+package calendar;
+
+service Calendar {
+  rpc CreateEvent(Event) returns (Event) {}
+  rpc UpdateEvent(Event) returns (Event) {}
+  rpc GetEvents(GetEventsParams) returns (Events) {}
+  rpc DeleteEvent(DeleteEventParams) returns (DeleteEventOutput) {}
+}

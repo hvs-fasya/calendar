@@ -3,20 +3,19 @@ package storage
 import (
 	"reflect"
 	"testing"
-	"time"
 
 	uuid "github.com/satori/go.uuid"
 
 	"github.com/hvs-fasya/calendar/internal/models"
-	"github.com/hvs-fasya/calendar/internal/utils"
+	"github.com/hvs-fasya/calendar/internal/test_utils"
 )
 
 func TestMemStore_GetEvents(t *testing.T) {
 	type args struct {
 		event *models.Event
 	}
-	var existEvent = newRandomEvent()
-	var notExistEvent = newRandomEvent()
+	var existEvent = test_utils.NewRandomEvent()
+	var notExistEvent = test_utils.NewRandomEvent()
 	tests := []struct {
 		name    string
 		wantLen int
@@ -56,7 +55,7 @@ func TestMemStore_CreateEvent(t *testing.T) {
 	type args struct {
 		event models.Event
 	}
-	var randEvent = newRandomEvent()
+	var randEvent = test_utils.NewRandomEvent()
 
 	t.Run("create_event", func(t *testing.T) {
 		s := InitMemoryStore()
@@ -80,8 +79,8 @@ func TestMemStore_CreateEvent(t *testing.T) {
 }
 
 func TestMemStore_UpdateEvent(t *testing.T) {
-	var existEvent = newRandomEvent()
-	var updateData = newRandomEvent().EventData
+	var existEvent = test_utils.NewRandomEvent()
+	var updateData = test_utils.NewRandomEvent().EventData
 	s := InitMemoryStore()
 	exist, _ := s.CreateEvent(existEvent)
 
@@ -105,7 +104,7 @@ func TestMemStore_UpdateEvent(t *testing.T) {
 }
 
 func TestMemStore_DeleteEvent(t *testing.T) {
-	var existEvent = newRandomEvent()
+	var existEvent = test_utils.NewRandomEvent()
 	var notFoundUUID = uuid.NewV4().String()
 	s := InitMemoryStore()
 	exist, _ := s.CreateEvent(existEvent)
@@ -126,19 +125,4 @@ func TestMemStore_DeleteEvent(t *testing.T) {
 			return
 		}
 	})
-}
-
-func newRandomEvent() models.Event {
-	d := time.Duration(1 * time.Hour)
-	nBefore := time.Duration(15 * time.Minute)
-	return models.Event{
-		EventData: models.EventData{
-			Title:        utils.RandStringBytes(10),
-			TimeStamp:    time.Now(),
-			Duration:     d,
-			Description:  utils.RandStringBytes(10),
-			NotifyBefore: &nBefore,
-		},
-		User: models.User{},
-	}
 }

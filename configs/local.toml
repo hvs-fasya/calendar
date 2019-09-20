@@ -3,3 +3,10 @@ ENVIRONMENT = "dev"
 	DBName = "calendar"
 	DBUser = "calendar_user"
 	DBPass = "calendar_pass"
+
+[SERVER]
+	Port = "8080"
+
+[CLIENT]
+	Host = "127.0.0.1"
+	Port = "8080"

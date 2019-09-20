@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+
+package calendar;
+
+message Event {
+  string UUID = 1;
+  EventData data = 2;
+  User user = 3;
+}
+
+message EventData {
+  string Title = 1;
+  google.protobuf.Timestamp TimeStamp = 2;
+  google.protobuf.Duration Duration = 3;
+  string Description = 4;
+  google.protobuf.Duration NotifyBefore = 5;
+}
+
+message User {}
+
+message Events { map<string, Event> events = 1; }
+
+message GetEventsParams {}
+
+message DeleteEventParams { string uuid = 1; }
+
+message DeleteEventOutput {}
